@@ -17,7 +17,7 @@ public class FlightBookingTest {
 
     @Test
     public void testThatResultsAppearForAOneWayJourney() {
-
+        System.out.println("abcd");
         setDriverPath();
         driver.get("https://www.cleartrip.com/");
         waitFor(2000);
