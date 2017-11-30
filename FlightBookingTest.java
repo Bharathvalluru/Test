@@ -11,20 +11,17 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class FlightBookingTest {
+public class FlightBookingTest extends  BaseClearTrip{
 
-    WebDriver driver ;
+
 
 
     @Test
     public void testThatResultsAppearForAOneWayJourney() {
-        System.out.println("abcd");
-        setDriverPath();
-        driver= new ChromeDriver();
-        driver.get("https://www.cleartrip.com/");
-        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-        driver.findElement(By.id("OneWay")).click();
 
+
+
+        driver.findElement(By.id("OneWay")).click();
         driver.findElement(By.id("FromTag")).clear();
         driver.findElement(By.id("FromTag")).sendKeys("Bangalore");
 
@@ -50,7 +47,7 @@ public class FlightBookingTest {
         Assert.assertTrue(isElementPresent(By.className("searchSummary")));
 
         //close the browser
-        driver.quit();
+
     }
     private boolean isElementPresent(By by) {
         try {
@@ -61,16 +58,5 @@ public class FlightBookingTest {
         }
     }
 
-    public static void setDriverPath() {
-        if (System.getProperty("os.name").contains("Mac")) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver");
-        }
-        if (System.getProperty("os.name").contains("Windows")) {
-            System.out.println();
-            System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-        }
-        if (System.getProperty("os.name").contains("Linux")) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver_linux");
-        }
-    }
+
 }

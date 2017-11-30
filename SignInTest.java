@@ -1,35 +1,43 @@
 import com.sun.javafx.PlatformUtil;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class SignInTest {
+public class SignInTest extends BaseClearTrip {
 
-    WebDriver driver;
+    @FindBy(linkText = "Your trips")
+    private WebElement yourTrips;
 
-    @Test
+    @FindBy(id = "SignIn")
+    private WebElement signIn;
+
+    @FindBy(id = "signInButton")
+    private WebElement signInButton;
+
+    @FindBy(id = "errors1")
+    private WebElement errorMessage;
+
+
+
+
+ @Test
     public void shouldThrowAnErrorIfSignInDetailsAreMissing() {
-
-        FlightBookingTest.setDriverPath();
-        driver = new ChromeDriver();
-        driver.get("https://www.cleartrip.com/");
-        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-
-        driver.findElement(By.linkText("Your trips")).click();
-        driver.findElement(By.id("SignIn")).click();
+     SignInTest page = PageFactory.initElements(driver,SignInTest.class);
+        page.yourTrips.click();
+        page.signIn.click();
         driver.switchTo().frame("modal_window");
-        driver.findElement(By.id("signInButton")).click();
+        page.signInButton.click();
+        Assert.assertTrue(page.errorMessage.getText().contains("There were errors in your submission"));
 
-        String errors1 = driver.findElement(By.id("errors1")).getText();
-        Assert.assertTrue(errors1.contains("There were errors in your submission"));
-        driver.quit();
+
     }
-
-
-
-
 }

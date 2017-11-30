@@ -25,20 +25,13 @@ public class HotelBookingTest {
 
     @Test
     public void shouldBeAbleToSearchForHotels() {
-        FlightBookingTest.setDriverPath();
-        driver = new ChromeDriver();
-        driver.get("https://www.cleartrip.com/");
+
         HotelBookingTest page = PageFactory.initElements(driver,HotelBookingTest.class);
         page.hotelLink.click();
-
         page.localityTextBox.sendKeys("Indiranagar, Bangalore");
-
         new Select(page.travellerSelection).selectByVisibleText("1 room, 2 adults");
         page.searchButton.click();
-
-        driver.quit();
-
-    }
+     }
 
 
 
