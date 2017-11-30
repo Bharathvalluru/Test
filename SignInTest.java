@@ -37,7 +37,5 @@ public class SignInTest extends BaseClearTrip {
         driver.switchTo().frame("modal_window");
         page.signInButton.click();
         Assert.assertTrue(page.errorMessage.getText().contains("There were errors in your submission"));
-
-
     }
 }
